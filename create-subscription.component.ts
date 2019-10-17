@@ -19,6 +19,7 @@ export class CreateSubscriptionComponent implements OnInit {
 
 
   private passwordPattern = '^(?=.*?[A-Za-z])(?=.*?[#?!@$%^&*-]).{8,8}$';
+  private emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   subscriptionTypes: ISubscriptionType[] = [
     { value: 'basic', name: 'Basic' },
     { value: 'advanced', name: 'Advanced' },
@@ -41,7 +42,7 @@ export class CreateSubscriptionComponent implements OnInit {
 
   prepareForm() {
     this.subscriptionFormGroup = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       subscription: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]]
     });
